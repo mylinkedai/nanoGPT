@@ -35,6 +35,7 @@ from model import GPTConfig, GPT
 out_dir = 'out'
 eval_interval = 2000
 log_interval = 1
+log_inplace = False # if True, update the same console line for iter logs
 eval_iters = 200
 eval_only = False # if True, script exits right after the first eval
 always_save_checkpoint = True # if True, always save a checkpoint after each eval
@@ -57,6 +58,8 @@ bias = False # do we use bias inside LayerNorm and Linear layers?
 # adamw optimizer
 learning_rate = 6e-4 # max learning rate
 max_iters = 600000 # total number of training iterations
+# wall-clock time limit in seconds (0 disables)
+max_time_seconds = 0
 weight_decay = 1e-1
 beta1 = 0.9
 beta2 = 0.95
@@ -249,6 +252,7 @@ if wandb_log and master_process:
 # training loop
 X, Y = get_batch('train') # fetch the very first batch
 t0 = time.time()
+train_start_time = t0
 local_iter_num = 0 # number of iterations in the lifetime of this process
 raw_model = model.module if ddp else model # unwrap DDP container if needed
 running_mfu = -1.0
@@ -261,6 +265,8 @@ while True:
 
     # evaluate the loss on train/val sets and write checkpoints
     if iter_num % eval_interval == 0 and master_process:
+        if log_inplace:
+            print()
         losses = estimate_loss()
         print(f"step {iter_num}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
         if wandb_log:
@@ -324,11 +330,17 @@ while True:
         if local_iter_num >= 5: # let the training loop settle a bit
             mfu = raw_model.estimate_mfu(batch_size * gradient_accumulation_steps, dt)
             running_mfu = mfu if running_mfu == -1.0 else 0.9*running_mfu + 0.1*mfu
-        print(f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%")
+        line = f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%"
+        if log_inplace:
+            print(line.ljust(120), end='\r', flush=True)
+        else:
+            print(line)
     iter_num += 1
     local_iter_num += 1
 
     # termination conditions
+    if max_time_seconds and (time.time() - train_start_time) >= max_time_seconds:
+        break
     if iter_num > max_iters:
         break
 
