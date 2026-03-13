@@ -1,0 +1,288 @@
+[2026-03-12 20:42:53] Overriding config with config/train_dolly15k_scratch.py:
+[2026-03-12 20:42:53] # Finetune GPT-2 (124M) on Databricks Dolly 15k (instruction-following).
+[2026-03-12 20:42:53] # Mac-friendly defaults; adjust as needed.
+[2026-03-12 20:42:53] 
+[2026-03-12 20:42:53] out_dir = 'out-dolly15k'
+[2026-03-12 20:42:53] 
+[2026-03-12 20:42:53] dataset = 'dolly'
+[2026-03-12 20:42:53] init_from = 'scratch'
+[2026-03-12 20:42:53] 
+[2026-03-12 20:42:53] # evaluation/logging
+[2026-03-12 20:42:53] log_interval = 1
+[2026-03-12 20:42:53] eval_interval = 200
+[2026-03-12 20:42:53] eval_iters = 50
+[2026-03-12 20:42:53] 
+[2026-03-12 20:42:53] # batch/sequence
+[2026-03-12 20:42:53] block_size = 512
+[2026-03-12 20:42:53] batch_size = 2
+[2026-03-12 20:42:53] gradient_accumulation_steps = 16
+[2026-03-12 20:42:53] 
+[2026-03-12 20:42:53] # training length
+[2026-03-12 20:42:53] max_iters = 3000
+[2026-03-12 20:42:53] 
+[2026-03-12 20:42:53] # optimizer
+[2026-03-12 20:42:53] learning_rate = 1e-4
+[2026-03-12 20:42:53] weight_decay = 0.1
+[2026-03-12 20:42:53] beta1 = 0.9
+[2026-03-12 20:42:53] beta2 = 0.95
+[2026-03-12 20:42:53] grad_clip = 1.0
+[2026-03-12 20:42:53] 
+[2026-03-12 20:42:53] decay_lr = False
+[2026-03-12 20:42:53] 
+[2026-03-12 20:42:53] # regularization
+[2026-03-12 20:42:53] dropout = 0.1
+[2026-03-12 20:42:53] 
+[2026-03-12 20:42:53] Overriding: device = cpu
+[2026-03-12 20:42:53] Overriding: out_dir = out-dolly15k
+[2026-03-12 20:42:53] Overriding: max_iters = 100000000
+[2026-03-12 20:42:53] Overriding: max_time_seconds = 600
+[2026-03-12 20:42:53] Overriding: compile = False
+[2026-03-12 20:42:53] tokens per iteration will be: 16,384
+[2026-03-12 20:42:53] Initializing a new model from scratch
+[2026-03-12 20:42:53] defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)
+[2026-03-12 20:42:55] number of parameters: 123.59M
+[2026-03-12 20:42:55] /Users/cuper/code/nanoGPT/train.py:199: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+[2026-03-12 20:42:55]   scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+[2026-03-12 20:42:55] /Users/cuper/Library/Python/3.14/lib/python/site-packages/torch/cuda/amp/grad_scaler.py:31: UserWarning: torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.
+[2026-03-12 20:42:55]   super().__init__(
+[2026-03-12 20:42:55] num decayed parameter tensors: 50, with 123,961,344 parameters
+[2026-03-12 20:42:55] num non-decayed parameter tensors: 25, with 19,200 parameters
+[2026-03-12 20:42:56] using fused AdamW: False
+[2026-03-12 20:43:36] step 0: train loss 11.0035, val loss 11.0050
+[2026-03-12 20:44:07] iter 0: loss 10.9682, time 71016.07ms, mfu -100.00%
+[2026-03-12 20:44:34] iter 1: loss 9.9527, time 27080.80ms, mfu -100.00%
+[2026-03-12 20:45:02] iter 2: loss 9.3878, time 28028.24ms, mfu -100.00%
+[2026-03-12 20:45:32] iter 3: loss 9.3571, time 30311.11ms, mfu -100.00%
+[2026-03-12 20:45:53] iter 4: loss 9.3453, time 20750.08ms, mfu -100.00%
+[2026-03-12 20:46:14] iter 5: loss 9.3683, time 20765.83ms, mfu 0.20%
+[2026-03-12 20:46:35] iter 6: loss 8.9798, time 20881.74ms, mfu 0.20%
+[2026-03-12 20:46:55] iter 7: loss 8.8672, time 20570.47ms, mfu 0.20%
+[2026-03-12 20:47:16] iter 8: loss 8.9750, time 20103.71ms, mfu 0.20%
+[2026-03-12 20:47:36] iter 9: loss 8.7465, time 20801.65ms, mfu 0.20%
+[2026-03-12 20:47:56] iter 10: loss 9.0437, time 19601.54ms, mfu 0.20%
+[2026-03-12 20:48:15] iter 11: loss 9.0758, time 19541.17ms, mfu 0.20%
+[2026-03-12 20:48:35] iter 12: loss 8.9007, time 19421.10ms, mfu 0.21%
+[2026-03-12 20:48:55] iter 13: loss 8.1205, time 19702.86ms, mfu 0.21%
+[2026-03-12 20:49:15] iter 14: loss 8.2940, time 20207.36ms, mfu 0.21%
+[2026-03-12 20:49:34] iter 15: loss 8.6560, time 19575.98ms, mfu 0.21%
+[2026-03-12 20:49:55] iter 16: loss 8.2442, time 20150.99ms, mfu 0.21%
+[2026-03-12 20:50:15] iter 17: loss 7.7416, time 20206.57ms, mfu 0.21%
+[2026-03-12 20:50:35] iter 18: loss 8.2462, time 20689.43ms, mfu 0.21%
+[2026-03-12 20:50:56] iter 19: loss 7.9806, time 20633.57ms, mfu 0.21%
+[2026-03-12 20:51:16] iter 20: loss 7.8626, time 20313.03ms, mfu 0.21%
+[2026-03-12 20:51:37] iter 21: loss 7.8639, time 20469.17ms, mfu 0.21%
+[2026-03-12 20:51:57] iter 22: loss 7.4548, time 19795.28ms, mfu 0.21%
+[2026-03-12 20:52:16] iter 23: loss 7.7239, time 19654.83ms, mfu 0.21%
+[2026-03-12 20:52:36] iter 24: loss 7.7335, time 19383.22ms, mfu 0.21%
+[2026-03-12 20:52:55] iter 25: loss 7.4363, time 19525.02ms, mfu 0.21%
+[2026-03-12 20:53:15] iter 26: loss 8.0623, time 19408.55ms, mfu 0.21%
+[2026-03-12 21:01:30] Overriding config with config/train_dolly15k_scratch.py:
+[2026-03-12 21:01:30] # Finetune GPT-2 (124M) on Databricks Dolly 15k (instruction-following).
+[2026-03-12 21:01:30] # Mac-friendly defaults; adjust as needed.
+[2026-03-12 21:01:30] 
+[2026-03-12 21:01:30] out_dir = 'out-dolly15k'
+[2026-03-12 21:01:30] 
+[2026-03-12 21:01:30] dataset = 'dolly'
+[2026-03-12 21:01:30] init_from = 'scratch'
+[2026-03-12 21:01:30] 
+[2026-03-12 21:01:30] # evaluation/logging
+[2026-03-12 21:01:30] log_interval = 1
+[2026-03-12 21:01:30] eval_interval = 200
+[2026-03-12 21:01:30] eval_iters = 50
+[2026-03-12 21:01:30] 
+[2026-03-12 21:01:30] # batch/sequence
+[2026-03-12 21:01:30] block_size = 512
+[2026-03-12 21:01:30] batch_size = 2
+[2026-03-12 21:01:30] gradient_accumulation_steps = 16
+[2026-03-12 21:01:30] 
+[2026-03-12 21:01:30] # training length
+[2026-03-12 21:01:30] max_iters = 3000
+[2026-03-12 21:01:30] 
+[2026-03-12 21:01:30] # optimizer
+[2026-03-12 21:01:30] learning_rate = 1e-4
+[2026-03-12 21:01:30] weight_decay = 0.1
+[2026-03-12 21:01:30] beta1 = 0.9
+[2026-03-12 21:01:30] beta2 = 0.95
+[2026-03-12 21:01:30] grad_clip = 1.0
+[2026-03-12 21:01:30] 
+[2026-03-12 21:01:30] decay_lr = False
+[2026-03-12 21:01:30] 
+[2026-03-12 21:01:30] # regularization
+[2026-03-12 21:01:30] dropout = 0.1
+[2026-03-12 21:01:30] 
+[2026-03-12 21:01:30] Overriding: device = mps
+[2026-03-12 21:01:30] Overriding: out_dir = out-dolly15k
+[2026-03-12 21:01:30] Overriding: max_iters = 100000000
+[2026-03-12 21:01:30] Overriding: max_time_seconds = 600
+[2026-03-12 21:01:30] Overriding: compile = False
+[2026-03-12 21:01:30] tokens per iteration will be: 16,384
+[2026-03-12 21:01:30] Initializing a new model from scratch
+[2026-03-12 21:01:30] defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)
+[2026-03-12 21:01:33] number of parameters: 123.59M
+[2026-03-12 21:01:33] /Users/cuper/code/nanoGPT/train.py:199: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+[2026-03-12 21:01:33]   scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+[2026-03-12 21:01:33] /Users/cuper/Library/Python/3.14/lib/python/site-packages/torch/cuda/amp/grad_scaler.py:31: UserWarning: torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.
+[2026-03-12 21:01:33]   super().__init__(
+[2026-03-12 21:01:33] num decayed parameter tensors: 50, with 123,961,344 parameters
+[2026-03-12 21:01:33] num non-decayed parameter tensors: 25, with 19,200 parameters
+[2026-03-12 21:01:33] using fused AdamW: False
+[2026-03-12 21:01:40] step 0: train loss 11.0035, val loss 11.0050
+[2026-03-12 21:01:43] iter 0: loss 11.0276, time 9781.03ms, mfu -100.00%
+[2026-03-12 21:01:47] iter 1: loss 9.9728, time 3442.93ms, mfu -100.00%
+[2026-03-12 21:01:52] iter 2: loss 9.6223, time 4950.38ms, mfu -100.00%
+[2026-03-12 21:01:55] iter 3: loss 9.5500, time 3607.54ms, mfu -100.00%
+[2026-03-12 21:02:00] iter 4: loss 9.3645, time 4217.93ms, mfu -100.00%
+[2026-03-12 21:02:04] iter 5: loss 9.1001, time 4219.86ms, mfu 0.99%
+[2026-03-12 21:02:08] iter 6: loss 9.0289, time 3982.49ms, mfu 1.00%
+[2026-03-12 21:02:12] iter 7: loss 8.9584, time 4245.00ms, mfu 1.00%
+[2026-03-12 21:02:16] iter 8: loss 8.9484, time 4060.94ms, mfu 1.00%
+[2026-03-12 21:02:20] iter 9: loss 9.0077, time 4123.69ms, mfu 1.00%
+[2026-03-12 21:02:24] iter 10: loss 8.7891, time 3949.52ms, mfu 1.01%
+[2026-03-12 21:02:28] iter 11: loss 8.6964, time 3945.43ms, mfu 1.01%
+[2026-03-12 21:02:32] iter 12: loss 8.6710, time 3852.02ms, mfu 1.02%
+[2026-03-12 21:02:36] iter 13: loss 8.3782, time 4035.34ms, mfu 1.02%
+[2026-03-12 21:02:40] iter 14: loss 8.2638, time 4024.78ms, mfu 1.03%
+[2026-03-12 21:02:44] iter 15: loss 8.4350, time 4085.83ms, mfu 1.03%
+[2026-03-12 21:02:48] iter 16: loss 7.9253, time 3725.45ms, mfu 1.04%
+[2026-03-12 21:02:52] iter 17: loss 8.8728, time 3925.23ms, mfu 1.04%
+[2026-03-12 21:02:55] iter 18: loss 8.1574, time 3578.92ms, mfu 1.05%
+[2026-03-12 21:02:59] iter 19: loss 8.0135, time 3877.39ms, mfu 1.05%
+[2026-03-12 21:03:03] iter 20: loss 8.0194, time 4060.47ms, mfu 1.05%
+[2026-03-12 21:03:07] iter 21: loss 7.9768, time 3976.95ms, mfu 1.05%
+[2026-03-12 21:03:11] iter 22: loss 7.8876, time 3827.37ms, mfu 1.06%
+[2026-03-12 21:03:15] iter 23: loss 8.5147, time 3999.62ms, mfu 1.06%
+[2026-03-12 21:03:19] iter 24: loss 7.8235, time 3747.55ms, mfu 1.06%
+[2026-03-12 21:03:23] iter 25: loss 7.7909, time 3853.31ms, mfu 1.06%
+[2026-03-12 21:03:27] iter 26: loss 7.8176, time 4264.56ms, mfu 1.06%
+[2026-03-12 21:03:31] iter 27: loss 7.3597, time 3968.24ms, mfu 1.06%
+[2026-03-12 21:03:35] iter 28: loss 7.8400, time 4133.29ms, mfu 1.05%
+[2026-03-12 21:03:39] iter 29: loss 7.8695, time 3913.69ms, mfu 1.05%
+[2026-03-12 21:03:43] iter 30: loss 7.3826, time 3915.36ms, mfu 1.06%
+[2026-03-12 21:03:47] iter 31: loss 7.4245, time 3756.98ms, mfu 1.06%
+[2026-03-12 21:03:51] iter 32: loss 7.5975, time 4206.89ms, mfu 1.06%
+[2026-03-12 21:03:55] iter 33: loss 7.4840, time 4173.36ms, mfu 1.05%
+[2026-03-12 21:03:59] iter 34: loss 7.2780, time 3880.21ms, mfu 1.05%
+[2026-03-12 21:04:03] iter 35: loss 7.4611, time 3826.80ms, mfu 1.06%
+[2026-03-12 21:04:08] iter 36: loss 7.3165, time 5027.32ms, mfu 1.03%
+[2026-03-12 21:04:11] iter 37: loss 7.3653, time 3459.64ms, mfu 1.05%
+[2026-03-12 21:04:15] iter 38: loss 7.2687, time 3438.34ms, mfu 1.07%
+[2026-03-12 21:04:18] iter 39: loss 7.3675, time 3435.59ms, mfu 1.08%
+[2026-03-12 21:04:24] iter 40: loss 6.9852, time 5675.84ms, mfu 1.05%
+[2026-03-12 21:04:40] iter 41: loss 7.1364, time 15895.37ms, mfu 0.97%
+[2026-03-12 21:04:44] iter 42: loss 6.9928, time 4123.97ms, mfu 0.98%
+[2026-03-12 21:04:47] iter 43: loss 6.9095, time 3664.36ms, mfu 0.99%
+[2026-03-12 21:04:51] iter 44: loss 7.0559, time 3528.32ms, mfu 1.01%
+[2026-03-12 21:04:55] iter 45: loss 7.3445, time 3957.36ms, mfu 1.02%
+[2026-03-12 21:04:58] iter 46: loss 6.6893, time 3625.37ms, mfu 1.03%
+[2026-03-12 21:05:02] iter 47: loss 7.2724, time 3899.46ms, mfu 1.04%
+[2026-03-12 21:05:06] iter 48: loss 7.4470, time 3781.19ms, mfu 1.04%
+[2026-03-12 21:05:10] iter 49: loss 6.8570, time 3859.69ms, mfu 1.05%
+[2026-03-12 21:05:14] iter 50: loss 7.1531, time 3898.00ms, mfu 1.05%
+[2026-03-12 21:05:18] iter 51: loss 6.5773, time 3816.53ms, mfu 1.05%
+[2026-03-12 21:05:22] iter 52: loss 6.8088, time 3991.84ms, mfu 1.05%
+[2026-03-12 21:05:26] iter 53: loss 7.0083, time 3833.59ms, mfu 1.06%
+[2026-03-12 21:05:30] iter 54: loss 7.2484, time 3924.08ms, mfu 1.06%
+[2026-03-12 21:05:33] iter 55: loss 6.9694, time 3874.19ms, mfu 1.06%
+[2026-03-12 21:05:37] iter 56: loss 7.4429, time 3915.65ms, mfu 1.06%
+[2026-03-12 21:05:41] iter 57: loss 6.9628, time 3902.74ms, mfu 1.06%
+[2026-03-12 21:05:45] iter 58: loss 7.0229, time 3876.20ms, mfu 1.07%
+[2026-03-12 21:05:49] iter 59: loss 7.1588, time 3895.28ms, mfu 1.07%
+[2026-03-12 21:05:53] iter 60: loss 7.1594, time 3857.93ms, mfu 1.07%
+[2026-03-12 21:05:57] iter 61: loss 7.0130, time 3876.37ms, mfu 1.07%
+[2026-03-12 21:06:01] iter 62: loss 7.2657, time 3914.67ms, mfu 1.07%
+[2026-03-12 21:06:05] iter 63: loss 6.6560, time 3959.15ms, mfu 1.07%
+[2026-03-12 21:06:08] iter 64: loss 6.7869, time 3721.58ms, mfu 1.07%
+[2026-03-12 21:06:12] iter 65: loss 6.8222, time 3955.38ms, mfu 1.07%
+[2026-03-12 21:06:16] iter 66: loss 7.0056, time 3891.05ms, mfu 1.07%
+[2026-03-12 21:06:20] iter 67: loss 6.7502, time 3914.13ms, mfu 1.07%
+[2026-03-12 21:06:24] iter 68: loss 6.8559, time 3905.35ms, mfu 1.07%
+[2026-03-12 21:06:28] iter 69: loss 6.6885, time 3973.26ms, mfu 1.07%
+[2026-03-12 21:06:32] iter 70: loss 7.2029, time 3742.52ms, mfu 1.08%
+[2026-03-12 21:06:35] iter 71: loss 6.7675, time 3648.97ms, mfu 1.08%
+[2026-03-12 21:06:39] iter 72: loss 6.5123, time 3749.79ms, mfu 1.09%
+[2026-03-12 21:06:43] iter 73: loss 6.5087, time 3632.73ms, mfu 1.09%
+[2026-03-12 21:06:46] iter 74: loss 6.4488, time 3684.71ms, mfu 1.10%
+[2026-03-12 21:06:50] iter 75: loss 6.7190, time 3582.17ms, mfu 1.11%
+[2026-03-12 21:06:54] iter 76: loss 6.5270, time 3629.81ms, mfu 1.11%
+[2026-03-12 21:06:57] iter 77: loss 6.6694, time 3595.46ms, mfu 1.12%
+[2026-03-12 21:07:01] iter 78: loss 6.5327, time 3606.52ms, mfu 1.12%
+[2026-03-12 21:07:04] iter 79: loss 7.1991, time 3608.19ms, mfu 1.12%
+[2026-03-12 21:07:08] iter 80: loss 6.9883, time 3600.89ms, mfu 1.13%
+[2026-03-12 21:07:11] iter 81: loss 7.0800, time 3465.01ms, mfu 1.14%
+[2026-03-12 21:07:15] iter 82: loss 7.2048, time 3525.85ms, mfu 1.14%
+[2026-03-12 21:07:18] iter 83: loss 6.6305, time 3478.64ms, mfu 1.15%
+[2026-03-12 21:07:22] iter 84: loss 6.8275, time 3472.48ms, mfu 1.15%
+[2026-03-12 21:07:25] iter 85: loss 7.2578, time 3499.29ms, mfu 1.16%
+[2026-03-12 21:07:29] iter 86: loss 6.8791, time 3447.93ms, mfu 1.16%
+[2026-03-12 21:07:32] iter 87: loss 6.6800, time 3418.78ms, mfu 1.17%
+[2026-03-12 21:07:36] iter 88: loss 7.0881, time 3418.94ms, mfu 1.18%
+[2026-03-12 21:07:39] iter 89: loss 6.3586, time 3402.75ms, mfu 1.18%
+[2026-03-12 21:07:43] iter 90: loss 6.9106, time 3403.06ms, mfu 1.19%
+[2026-03-12 21:07:46] iter 91: loss 7.0321, time 3509.26ms, mfu 1.19%
+[2026-03-12 21:07:50] iter 92: loss 6.8800, time 3716.75ms, mfu 1.18%
+[2026-03-12 21:07:53] iter 93: loss 6.5492, time 3409.20ms, mfu 1.19%
+[2026-03-12 21:07:57] iter 94: loss 6.6708, time 3411.93ms, mfu 1.19%
+[2026-03-12 21:08:00] iter 95: loss 6.3443, time 3421.86ms, mfu 1.19%
+[2026-03-12 21:08:04] iter 96: loss 6.4113, time 3528.79ms, mfu 1.19%
+[2026-03-12 21:08:07] iter 97: loss 7.0618, time 3413.73ms, mfu 1.20%
+[2026-03-12 21:08:10] iter 98: loss 6.9214, time 3370.26ms, mfu 1.20%
+[2026-03-12 21:08:14] iter 99: loss 6.5961, time 3435.93ms, mfu 1.20%
+[2026-03-12 21:08:17] iter 100: loss 7.2480, time 3633.44ms, mfu 1.20%
+[2026-03-12 21:08:21] iter 101: loss 6.4750, time 3635.58ms, mfu 1.19%
+[2026-03-12 21:08:24] iter 102: loss 6.5277, time 3395.60ms, mfu 1.20%
+[2026-03-12 21:08:28] iter 103: loss 6.2647, time 3373.58ms, mfu 1.20%
+[2026-03-12 21:08:31] iter 104: loss 7.0776, time 3404.46ms, mfu 1.21%
+[2026-03-12 21:08:35] iter 105: loss 6.2600, time 3393.33ms, mfu 1.21%
+[2026-03-12 21:08:38] iter 106: loss 6.6576, time 3448.98ms, mfu 1.21%
+[2026-03-12 21:08:41] iter 107: loss 6.6554, time 3404.79ms, mfu 1.21%
+[2026-03-12 21:08:45] iter 108: loss 6.4663, time 3412.22ms, mfu 1.21%
+[2026-03-12 21:08:48] iter 109: loss 6.3904, time 3407.81ms, mfu 1.21%
+[2026-03-12 21:08:52] iter 110: loss 6.8841, time 3432.62ms, mfu 1.22%
+[2026-03-12 21:08:55] iter 111: loss 7.1001, time 3396.92ms, mfu 1.22%
+[2026-03-12 21:08:58] iter 112: loss 6.9013, time 3393.74ms, mfu 1.22%
+[2026-03-12 21:09:02] iter 113: loss 6.6070, time 3373.45ms, mfu 1.22%
+[2026-03-12 21:09:05] iter 114: loss 6.8307, time 3366.50ms, mfu 1.22%
+[2026-03-12 21:09:09] iter 115: loss 6.3886, time 3388.25ms, mfu 1.22%
+[2026-03-12 21:09:12] iter 116: loss 7.2956, time 3385.39ms, mfu 1.23%
+[2026-03-12 21:09:15] iter 117: loss 6.8972, time 3431.66ms, mfu 1.23%
+[2026-03-12 21:09:19] iter 118: loss 6.6508, time 3379.41ms, mfu 1.23%
+[2026-03-12 21:09:22] iter 119: loss 6.4783, time 3408.39ms, mfu 1.23%
+[2026-03-12 21:09:26] iter 120: loss 6.0972, time 3375.24ms, mfu 1.23%
+[2026-03-12 21:09:29] iter 121: loss 7.1008, time 3391.53ms, mfu 1.23%
+[2026-03-12 21:09:32] iter 122: loss 6.3292, time 3381.08ms, mfu 1.23%
+[2026-03-12 21:09:36] iter 123: loss 6.2557, time 3368.51ms, mfu 1.23%
+[2026-03-12 21:09:39] iter 124: loss 6.5184, time 3368.59ms, mfu 1.23%
+[2026-03-12 21:09:42] iter 125: loss 6.2835, time 3377.94ms, mfu 1.23%
+[2026-03-12 21:09:46] iter 126: loss 6.6979, time 3372.03ms, mfu 1.23%
+[2026-03-12 21:09:49] iter 127: loss 6.6940, time 3378.47ms, mfu 1.24%
+[2026-03-12 21:09:53] iter 128: loss 6.4541, time 3396.03ms, mfu 1.24%
+[2026-03-12 21:09:56] iter 129: loss 6.8147, time 3370.17ms, mfu 1.24%
+[2026-03-12 21:09:59] iter 130: loss 6.8652, time 3424.50ms, mfu 1.23%
+[2026-03-12 21:10:03] iter 131: loss 6.2519, time 3422.65ms, mfu 1.23%
+[2026-03-12 21:10:06] iter 132: loss 6.7964, time 3426.55ms, mfu 1.23%
+[2026-03-12 21:10:10] iter 133: loss 6.7440, time 3453.63ms, mfu 1.23%
+[2026-03-12 21:10:13] iter 134: loss 6.0915, time 3392.26ms, mfu 1.23%
+[2026-03-12 21:10:17] iter 135: loss 6.6702, time 3421.06ms, mfu 1.23%
+[2026-03-12 21:10:20] iter 136: loss 6.4442, time 3397.82ms, mfu 1.23%
+[2026-03-12 21:10:23] iter 137: loss 6.5763, time 3387.51ms, mfu 1.23%
+[2026-03-12 21:10:27] iter 138: loss 6.6591, time 3417.23ms, mfu 1.23%
+[2026-03-12 21:10:30] iter 139: loss 6.7086, time 3394.04ms, mfu 1.23%
+[2026-03-12 21:10:34] iter 140: loss 6.1744, time 3400.38ms, mfu 1.23%
+[2026-03-12 21:10:37] iter 141: loss 6.2528, time 3387.94ms, mfu 1.23%
+[2026-03-12 21:10:40] iter 142: loss 6.2546, time 3413.77ms, mfu 1.23%
+[2026-03-12 21:10:44] iter 143: loss 6.4827, time 3403.69ms, mfu 1.23%
+[2026-03-12 21:10:47] iter 144: loss 6.5151, time 3411.47ms, mfu 1.23%
+[2026-03-12 21:10:51] iter 145: loss 6.4721, time 3461.96ms, mfu 1.23%
+[2026-03-12 21:10:54] iter 146: loss 6.4352, time 3400.07ms, mfu 1.23%
+[2026-03-12 21:10:57] iter 147: loss 6.6281, time 3402.48ms, mfu 1.23%
+[2026-03-12 21:11:01] iter 148: loss 5.9909, time 3407.25ms, mfu 1.23%
+[2026-03-12 21:11:04] iter 149: loss 6.6903, time 3418.40ms, mfu 1.23%
+[2026-03-12 21:11:08] iter 150: loss 7.0298, time 3385.58ms, mfu 1.23%
+[2026-03-12 21:11:11] iter 151: loss 6.6937, time 3408.17ms, mfu 1.23%
+[2026-03-12 21:11:14] iter 152: loss 6.1989, time 3411.08ms, mfu 1.23%
+[2026-03-12 21:11:18] iter 153: loss 7.0878, time 3407.02ms, mfu 1.23%
+[2026-03-12 21:11:21] iter 154: loss 6.1275, time 3382.79ms, mfu 1.23%
+[2026-03-12 21:11:25] iter 155: loss 6.5634, time 3403.13ms, mfu 1.23%
+[2026-03-12 21:11:28] iter 156: loss 6.3579, time 3406.30ms, mfu 1.23%
+[2026-03-12 21:11:31] iter 157: loss 6.7968, time 3405.36ms, mfu 1.23%
+[2026-03-12 21:11:35] iter 158: loss 6.6808, time 3421.79ms, mfu 1.23%

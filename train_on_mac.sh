@@ -22,26 +22,15 @@ DEVICE="${DEVICE:-}"
 if [[ -z "${DEVICE}" ]]; then
   step "detect device (mps/cpu)"
   DEVICE="$("$PYTHON" - <<'PY'
-import platform
 import torch
 
-def macos_major():
-    ver = platform.mac_ver()[0]
-    try:
-        return int(ver.split(".")[0])
-    except Exception:
-        return 0
-
 mps_ok = getattr(torch.backends, "mps", None) is not None and torch.backends.mps.is_available()
-if mps_ok and macos_major() >= 14:
-    print("mps")
-else:
-    print("cpu")
+print("mps" if mps_ok else "cpu")
 PY
   )"
 fi
 
-DEFAULT_CONFIG="config/finetune_shakespeare_gpt2.py"
+DEFAULT_CONFIG="config/train_dolly15k_scratch.py"
 
 # args: [config] [duration]
 ARG1="${1:-}"
@@ -176,6 +165,10 @@ if [[ ${NEED_PREP:-0} -eq 1 ]]; then
     step "prepare dataset: shakespeare_char"
     echo "Preparing Shakespeare char dataset..."
     "$PYTHON" data/shakespeare_char/prepare.py
+  elif [[ "${DATASET:-}" == "dolly" ]]; then
+    step "prepare dataset: dolly"
+    echo "Preparing Dolly 15k dataset..."
+    "$PYTHON" data/dolly/prepare.py
   else
     step "prepare dataset: unknown (error)"
     echo "Dataset ${DATASET:-<unknown>} missing train.bin; please prepare it manually."
@@ -186,7 +179,7 @@ fi
 step "print device"
 echo "Using device: $DEVICE"
 
-LOG_INPLACE="${LOG_INPLACE:-1}"
+LOG_INPLACE="${LOG_INPLACE:-0}"
 LOG_INPLACE_ARG=()
 if [[ "$LOG_INPLACE" -eq 1 ]]; then
   LOG_INPLACE_ARG=(--log_inplace=True)
@@ -234,7 +227,7 @@ fi
 LOG_FILE="${LOG_FILE:-train.log}"
 LOG_TS="${LOG_TS:-1}"
 
-TRAIN_CMD=( "$PYTHON" train.py "$CONFIG"
+TRAIN_CMD=( env PYTHONUNBUFFERED=1 "$PYTHON" -u train.py "$CONFIG"
   --device="$DEVICE"
   --out_dir="$OUT_DIR"
   ${LOG_INPLACE_ARG[@]:+"${LOG_INPLACE_ARG[@]}"}
@@ -245,7 +238,7 @@ TRAIN_CMD=( "$PYTHON" train.py "$CONFIG"
 
 if [[ "$LOG_TS" -eq 1 ]]; then
   step "run training (timestamped log)"
-  "${TRAIN_CMD[@]}" 2>&1 | "$PYTHON" -u - "$LOG_FILE" <<'PY'
+  "${TRAIN_CMD[@]}" 2>&1 | "$PYTHON" -u -c '
 import sys
 from datetime import datetime
 
@@ -257,7 +250,7 @@ with open(log_path, "a", encoding="utf-8") as f:
         out = f"[{ts}] {line}"
         print(out, flush=True)
         f.write(out + "\n")
-PY
+' "$LOG_FILE"
 else
   step "run training (stdout)"
   "${TRAIN_CMD[@]}"
