@@ -47,6 +47,23 @@ fi
 
 OUT_DIR="${OUT_DIR:-${1:-out-shakespeare-bpe}}"
 
+SAMPLE_ONCE="${SAMPLE_ONCE:-0}"
+INIT_FROM="${INIT_FROM:-resume}"
+NUM_SAMPLES="${NUM_SAMPLES:-1}"
+MAX_NEW_TOKENS="${MAX_NEW_TOKENS:-200}"
+START_PROMPT="${START_PROMPT:-$'Instruction:\nWhat causes rainbows?\n\nResponse:\n'}"
+
+if [[ "$SAMPLE_ONCE" -eq 1 ]]; then
+  "$PYTHON" sample.py \
+    --init_from="$INIT_FROM" \
+    --out_dir="$OUT_DIR" \
+    --device="$DEVICE" \
+    --num_samples="$NUM_SAMPLES" \
+    --max_new_tokens="$MAX_NEW_TOKENS" \
+    --start="$START_PROMPT"
+  exit 0
+fi
+
 OUT_DIR="$OUT_DIR" DEVICE="$DEVICE" "$PYTHON" - "$OUT_DIR" <<'PY'
 import os
 import sys

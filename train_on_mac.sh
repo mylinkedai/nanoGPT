@@ -20,14 +20,20 @@ fi
 
 DEVICE="${DEVICE:-}"
 if [[ -z "${DEVICE}" ]]; then
-  step "detect device (mps/cpu)"
-  DEVICE="$("$PYTHON" - <<'PY'
-import torch
+  step "default device: mps"
+  DEVICE="mps"
+fi
 
-mps_ok = getattr(torch.backends, "mps", None) is not None and torch.backends.mps.is_available()
-print("mps" if mps_ok else "cpu")
+if [[ "${DEVICE}" == "mps" ]]; then
+  step "validate mps runtime"
+  if ! "$PYTHON" - <<'PY' >/dev/null 2>&1
+import torch
+torch.zeros(1, device="mps")
 PY
-  )"
+  then
+    echo "MPS is unavailable or unusable in this environment. Exiting because DEVICE=mps is required."
+    exit 1
+  fi
 fi
 
 DEFAULT_CONFIG="config/train_dolly15k_scratch.py"
